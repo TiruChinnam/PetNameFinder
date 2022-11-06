@@ -24,14 +24,16 @@ public class StepDefinitions extends PetStore {
         String[] name = res.getBody().jsonPath().get("name").toString().split(",");
 
         String[] status = res.getBody().jsonPath().get("status").toString().split(",");
-        int flag = 0;
+        int flag = 0;   int doggie_count = 0;
         for(int i=0;i<name.length;i++){
             if(name[i].contains("doggie") && status[i].contains("available")){
+                doggie_count++;
                 flag = 1;
             }
         }
+        System.out.println("doggie count with available status : "+doggie_count);
         Assert.assertEquals(flag, 1);
-
+        Assert.assertNotEquals(doggie_count, 0);
     }
 
 
